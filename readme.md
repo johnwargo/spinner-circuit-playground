@@ -12,6 +12,8 @@ Movement starts in one direction, and when you press the left button, the moveme
 
 When you press the right button, the moving LED changes direction and resets the speed to the starting speed.
 
+You may have to hold a button down a little longer than expected to get the sketch to recognize the button push. If the sketch is busy calculating the position of the LED and so on, it may not register quick button pushes.
+
 ## Configuration
 
 The sketch supports several configuration settings, implemented as `#defines` at the beginning of the sketch. You shouldn't need to modify any of them, but feel free to play around with them as you study the sketch.

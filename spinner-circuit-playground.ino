@@ -1,16 +1,16 @@
 /* ********************************************************
- * Circuit Playground Spinner
- * By John M. Wargo (https://johnwargo.com)
- * 
- * This simple sketch spins one NeoPixel LED around the
- * Circuit Playground device. Use the left button to 
- * decrease speed. Use the right button to change the 
- * direction of the lit LED.
+   Circuit Playground Spinner
+   By John M. Wargo (https://johnwargo.com)
+
+   This simple sketch spins one NeoPixel LED around the
+   Circuit Playground device. Use the left button to
+   decrease speed. Use the right button to change the
+   direction of the lit LED.
 */
 // https://github.com/adafruit/Adafruit_CircuitPlayground
 #include <Adafruit_CircuitPlayground.h>
 
-#define debug false
+#define debug true
 #define speedIncrement 100
 #define speedLimit 500
 #define speedStart 100
@@ -51,11 +51,17 @@ void loop() {
   leftButtonIsDown = CircuitPlayground.leftButton();
   rightButtonIsDown = CircuitPlayground.rightButton();
   // Is the left button pressed?
+  /*
+   * This is a form of debouncing, checking to make sure the button
+   * wasn't down the previous loop - so you only act on the button once
+   * and ignore repeat button presses through the loop. What this means
+   * for the user is they'll have to unpress the button for long enough
+   * for the sketch to recognize it before pushing it again.
+   * https://www.arduino.cc/en/Tutorial/BuiltInExamples/Debounce
+  */
   if (leftButtonWasDown == false && leftButtonIsDown == true) {
-    if (debug) {
-      Serial.println("Left button pressed");
-    }
-    speed += speedIncrement;                  // increase delay, which means decrease speed
+    if (debug) Serial.println("Left button pressed");
+    speed += speedIncrement;  // increase delay, which means decrease speed
     if (speed > speedLimit) speed = speedStart;  // Reset once we've gone too far
     if (debug) {
       Serial.println("Speed: " + String(speed));
@@ -63,9 +69,7 @@ void loop() {
   }
   // Is the right button pressed?
   if (rightButtonWasDown == false && rightButtonIsDown == true) {
-    if (debug) {
-      Serial.println("Right button pressed");
-    }
+    if (debug) Serial.println("Right button pressed");
     direction = !direction;  // Change direction
     speed = speedStart;  // Reset the speed
   }
@@ -86,7 +90,7 @@ void updateNeoPixels() {
   // Did we go past start? Then move to the end
   if (currentLED < 0) currentLED = 9;
   // Did we go past the end? Then move to the beginning
-  if (currentLED > 9) currentLED = 0;  
+  if (currentLED > 9) currentLED = 0;
   // Then illuminate the selected NeoPixel in blue.
   CircuitPlayground.setPixelColor(currentLED, 0, 0, 255);
 }

@@ -11,10 +11,9 @@
 #include <Adafruit_CircuitPlayground.h>
 
 #define debug false
-/* Rather than hard coding 100 everywhere working with speed
-   make it a define so the compiler copies it in everywhere 
-   as needed during compilation */
 #define speedIncrement 100
+#define speedLimit 500
+#define speedStart 100
 
 // variables to track left button state
 bool leftButtonIsDown = false;
@@ -24,9 +23,9 @@ bool rightButtonIsDown = false;
 bool rightButtonWasDown = false;
 
 // Some other variables
-bool direction = true;       // which direction are the lights moving?
-int speed = speedIncrement;  // how fast is it moving?
-int currentLED = -1;         // which LED is currently illuminated?
+bool direction = true;  // which direction are the lights moving?
+int speed = speedStart; // how fast is it moving?
+int currentLED = -1;    // which LED is currently illuminated?
 
 void setup() {
   if (debug) {
@@ -57,7 +56,7 @@ void loop() {
       Serial.println("Left button pressed");
     }
     speed += speedIncrement;                  // increase delay, which means decrease speed
-    if (speed > 500) speed = speedIncrement;  // Reset once we've gone too far
+    if (speed > speedLimit) speed = speedStart;  // Reset once we've gone too far
     if (debug) {
       Serial.println("Speed: " + String(speed));
     }
@@ -68,7 +67,7 @@ void loop() {
       Serial.println("Right button pressed");
     }
     direction = !direction;  // Change direction
-    speed = speedIncrement;  // Reset the speed
+    speed = speedStart;  // Reset the speed
   }
 
   // Save the button state as previous button state

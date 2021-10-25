@@ -1,5 +1,5 @@
 /* ********************************************************
- * Lesson 3 Project
+ * Circuit Playground Spinner
  * By John M. Wargo (https://johnwargo.com)
  * 
  * This simple sketch spins one NeoPixel LED around the
@@ -32,7 +32,7 @@ void setup() {
   if (debug) {
     Serial.begin(9600);
     delay(500);
-    Serial.println("Lesson 3 Sketch");
+    Serial.println("Circuit Playground Spinner");
   }
 
   // Initialize the Circuit Playground board

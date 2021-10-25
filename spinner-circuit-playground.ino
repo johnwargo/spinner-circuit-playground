@@ -10,7 +10,7 @@
 // https://github.com/adafruit/Adafruit_CircuitPlayground
 #include <Adafruit_CircuitPlayground.h>
 
-#define debug true
+#define debug false
 #define speedIncrement 100
 #define speedLimit 500
 #define speedStart 100

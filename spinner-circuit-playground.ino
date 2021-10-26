@@ -54,8 +54,7 @@ void loop() {
   // Then get the state of the button and switches
   leftButtonIsDown = CircuitPlayground.leftButton();
   rightButtonIsDown = CircuitPlayground.rightButton();
-  // Is the left button pressed?
-  /*
+   /*
    * This is a form of debouncing, checking to make sure the button
    * wasn't down the previous loop - so you only act on the button once
    * and ignore repeat button presses through the loop. What this means
@@ -63,13 +62,12 @@ void loop() {
    * for the sketch to recognize it before pushing it again.
    * https://www.arduino.cc/en/Tutorial/BuiltInExamples/Debounce
   */
+  // Is the left button pressed?
   if (leftButtonWasDown == false && leftButtonIsDown == true) {
     if (debug) Serial.println("Left button pressed");
     speed += speedIncrement;  // increase delay, which means decrease speed
     if (speed > speedLimit) speed = speedStart;  // Reset once we've gone too far
-    if (debug) {
-      Serial.println("Speed: " + String(speed));
-    }
+    if (debug) Serial.println("Speed: " + String(speed));
   }
   // Is the right button pressed?
   if (rightButtonWasDown == false && rightButtonIsDown == true) {

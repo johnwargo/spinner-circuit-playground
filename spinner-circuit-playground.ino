@@ -11,8 +11,12 @@
 #include <Adafruit_CircuitPlayground.h>
 
 #define debug false
+// Every time the user presses the right button, the delay
+// between loops increases by this much (in milliseconds).
 #define speedIncrement 100
+// Maximum delay value before speed resets to `speedStart`
 #define speedLimit 500
+// Starting loop delay value (in milliseconds)
 #define speedStart 100
 
 // variables to track left button state

@@ -28,6 +28,7 @@ bool rightButtonWasDown = false;
 
 // Some other variables
 bool direction = true;  // which direction are the lights moving?
+bool resetSpeed = true;
 int speed = speedStart; // how fast is it moving?
 int currentLED = -1;    // which LED is currently illuminated?
 
@@ -54,13 +55,13 @@ void loop() {
   // Then get the state of the button and switches
   leftButtonIsDown = CircuitPlayground.leftButton();
   rightButtonIsDown = CircuitPlayground.rightButton();
-   /*
-   * This is a form of debouncing, checking to make sure the button
-   * wasn't down the previous loop - so you only act on the button once
-   * and ignore repeat button presses through the loop. What this means
-   * for the user is they'll have to unpress the button for long enough
-   * for the sketch to recognize it before pushing it again.
-   * https://www.arduino.cc/en/Tutorial/BuiltInExamples/Debounce
+  /*
+    This is a form of debouncing, checking to make sure the button
+    wasn't down the previous loop - so you only act on the button once
+    and ignore repeat button presses through the loop. What this means
+    for the user is they'll have to unpress the button for long enough
+    for the sketch to recognize it before pushing it again.
+    https://www.arduino.cc/en/Tutorial/BuiltInExamples/Debounce
   */
   // Is the left button pressed?
   if (leftButtonWasDown == false && leftButtonIsDown == true) {
@@ -73,7 +74,7 @@ void loop() {
   if (rightButtonWasDown == false && rightButtonIsDown == true) {
     if (debug) Serial.println("Right button pressed");
     direction = !direction;  // Change direction
-    speed = speedStart;  // Reset the speed
+    if (resetSpeed) speed = speedStart;  // Reset the speed
   }
 
   // Save the button state as previous button state
